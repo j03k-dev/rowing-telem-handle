@@ -13,7 +13,7 @@ The work is deliberately structured as a sequence of cheap experiments, each one
 | Stage | What it proves | Status |
 |-------|----------------|--------|
 | **0. Offline stroke detection** | A commodity phone IMU can reliably detect strokes and timing faults — before any hardware spend | ✅ **Complete (this document)** |
-| 1. On-water validation | The stroke signal survives the move from erg to water; blade-height faults become visible | ⏳ Next |
+| 1. On-water validation | The stroke signal survives the move from erg to water; blade-height faults become visible | ⏳ In progress |
 | 2. Metrics pipeline | Raw motion → coaching numbers (catch/finish angle, rate, height, crew sync) | Planned |
 | 3. Live firmware + BLE | Stream live off a moving oar instead of record-and-analyse | Planned |
 | 4. Sealed handle prototype | A custom, waterproof, wirelessly-charged handle that functions like stock | Planned |
@@ -143,7 +143,7 @@ Stage 0 validates the detection *approach* on the axis the erg exposes. Whether 
 
 ## What's next — Stage 1
 
-An ESP32-S3 microcontroller with a BNO055 IMU (~£75 in parts), taken on the water and mounted to the oar or hull with no packaging work at all. The goal is narrow and specific: confirm the signal shifts to yaw rate, confirm catch/finish angles fall out of it, and confirm that height faults — invisible here by design — become visible. In-handle packaging, waterproofing, and everything physical is a deliberately separate, later problem.
+An ESP32-S3 microcontroller with a BNO055 IMU (~£75 in parts), taken on the water and mounted to the oar with no packaging work at all. The goal is narrow and specific: confirm the signal shifts to yaw rate, confirm catch/finish angles fall out of it, and confirm that height faults — invisible here by design — become visible. In-handle packaging, waterproofing, and everything physical is a deliberately separate, later problem.
 
 ---
 
@@ -155,6 +155,8 @@ rowing-telem-handle/
 ├── requirements.txt          # Python dependencies
 ├── src/
 │   └── stage0_erg_explore.py # the analysis + detection pipeline
+├── firmware/
+│   └── i2c_scanner/          # Stage 1 I2C bus check
 ├── data/
 │   └── sample/               # the Sensor Logger recording used above
 └── plots/                    # exported figures referenced above
